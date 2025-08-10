@@ -130,7 +130,7 @@ MEDIA_URL = '/media/'
 
 
 if DEBUG:
-    STARICFILES_DIRS = [BASE_DIR / 'statics']
+    STATICFILES_DIRS = [BASE_DIR / 'statics']
 
 else:
 
