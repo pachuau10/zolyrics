@@ -1,5 +1,5 @@
 from django.db import models
-
+from cloudinary.models import CloudinaryField
 # Create your models here.
 from django.db import models
 
@@ -10,7 +10,9 @@ class Data(models.Model):
     phuahtu = models.CharField(max_length=255,)
     satu = models.CharField(max_length=255,)
     desc = models.TextField()
-    img = models.ImageField(upload_to='thlalak/',null=True,blank=True)
+    img = CloudinaryField('image', 
+                         folder='thlalak/',  # this sets the Cloudinary folder
+                         null=True, blank=True)
    
 
 
