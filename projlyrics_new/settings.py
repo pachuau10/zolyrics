@@ -167,5 +167,5 @@ DATABASES = {
 cloudinary.config(
     cloud_name = "dqquazig1",
     api_key = "829927333955873",
-    api_secret = "JN4bVPmGT5waPoDmQSiClvWXPSM",
+    api_secret = env('SECRET_API'),
 )
