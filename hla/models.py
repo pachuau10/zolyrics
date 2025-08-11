@@ -11,7 +11,7 @@ class Data(models.Model):
     satu = models.CharField(max_length=255,)
     desc = models.TextField()
     img = CloudinaryField('image', 
-                         folder='thlalak/',  # this sets the Cloudinary folder
+                         folder='thlalak/',
                          null=True, blank=True)
    
 

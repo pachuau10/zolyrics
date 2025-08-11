@@ -1,24 +1,30 @@
-from django.shortcuts import render
-
-# Create your views here.
-from django.shortcuts import render, get_object_or_404,redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
-from .models import Data 
-from . models import Req
+from .models import Data, Req
+from django.http import JsonResponse
 
-# This view handles the home page and search functionality
 def home(request):
+    if 'term' in request.GET:
+        term = request.GET.get('term')
+        qs = Data.objects.filter(
+            Q(name__istartswith=term) |
+            Q(phuahtu__istartswith=term) |
+            Q(satu__istartswith=term)
+        ).values_list('name', 'phuahtu', 'satu').distinct()[:10]
+
+        suggestions = []
+        for row in qs:
+            suggestions.extend([v for v in row if v])
+        suggestions = list(set(suggestions))
+        return JsonResponse(suggestions, safe=False)
 
     if request.method == 'POST':
         request_text = request.POST.get('request')
-        if request_text:  # Ensure the field is not empty
-            req_new = Req(req=request_text)
-            req_new.save()
-        # You should redirect the user after a successful POST to prevent re-submission
+        if request_text:
+            Req.objects.create(req=request_text)
         return redirect('home')
-    query = request.GET.get('q')
-    print(f"The search query is: '{query}'")
 
+    query = request.GET.get('q')
     if query:
         data = Data.objects.filter(
             Q(name__icontains=query) |
@@ -26,15 +32,11 @@ def home(request):
             Q(satu__icontains=query)
         )
     else:
-        # If no search query, show all songs
         data = Data.objects.all()
-       
+
     return render(request, 'home.html', {'data': data})
 
-# This view handles the detail page for a single song
+
 def hla(request, pk):
-    # Use get_object_or_404 to fetch the song or return a 404 error
     data = get_object_or_404(Data, pk=pk)
-    
-    # Pass the single song object to the new 'hla.html' template
     return render(request, 'hla.html', {'data': data})
