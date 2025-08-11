@@ -104,20 +104,34 @@
         </div>
       {% endfor %}
     {% else %}
-      <h3 class="text-center text-white">He hla hi ziah a la ni rih lo</h3>
+
+    <div class="" style="background-color: rgb(133,144,99)">
+            <div class="container">
+          <h3 class="text-right text-lg-center pr-4 text-white" >I hla zawn hi dah a la ni lo</h3>
+                <p class="text-white text-center">Dah i duh chuan request la...</p>
+                <p class="text-white text-center">A thupui,a phuahtu, satu... a theih chuan kimchang deuhin aw</p>
+            </div>
   
-        <div class="Reques">
-      <form method="POST">
-        <div class="d-flex justify-content-center align-items-center">
-    <div class="Reques">
-        <form method="POST">
-            {% csrf_token %}
-            <textarea name="request" rows="9" cols="60" placeholder="ziak la"></textarea><br>
-            <button type="submit" class="btn mt-2 text-white" style="background-color: rgb(53, 64, 36);">Submit</button>
-        </form>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="Reques">
+                <form method="POST">
+                    {% csrf_token %}
+                    <textarea 
+                        name="request" 
+                        class="form-control mb-2" 
+                        rows="6" 
+                        placeholder="ziak la"></textarea>
+                    <button type="submit" class="btn text-white w-100" style="background-color: rgb(53, 64, 36);">
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
-  
+
       
     {% endif %}
   </div>
