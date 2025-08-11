@@ -1,0 +1,80 @@
+     
+{% load static %}
+   
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4913010328689287"
+     crossorigin="anonymous"></script>
+ 
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark p-4" style="background-color: rgb(53, 64, 36);">
+  <a class="navbar-brand" href="{% url 'home' %}">CHHOHHREIVUNG</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="d-flex flex-column flex-lg-row align-items-lg-center w-100">
+      <h5 class="text-white mr-auto mb-2 mb-lg-0">HLA THU ZAWNNA</h5>
+
+      <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'home' %}">
+        
+        <input class="form-control form-control-sm w-auto mr-2"
+             type="search"
+             placeholder="chhu la"
+             name="q"
+             aria-label="Search"
+             style="width: 200px;background-color: rgb(229,215, 196);color: rgb(53, 64, 36);
+                 input::placeholder {
+      color: rgb(53, 64, 36);
+      opacity: 1; /* Make sure it’s not faded */
+    }">
+      <button class="btn btn-sm ml-2"
+        style="padding-top: 4px; padding-bottom: 4px; height: 32px;
+               background-color: rgb(229,215,196); color: rgb(53, 64, 36);">
+    search
+</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<div style="background-color: rgb(133,144,99); min-height: 100vh;">
+            <div class="container">
+          <h3 class="text-right text-lg-center pr-4 pt-3 text-white" >Han ziak ta poh che😜</h3>
+                <p class="text-white text-center">I hla request duh</p>
+                <p class="text-white text-center">A thupui,a phuahtu, satu... a theih chuan kimchang deuhin aw</p>
+            </div>
+  
+<div class="d-flex justify-content-center align-items-center">
+    <div class="Reques">
+        <form method="POST">
+            {% csrf_token %}
+            <textarea name="request" rows="9" cols="60" placeholder="ziak la"></textarea><br>
+            <button type="submit" class="btn mt-2 text-white" style="background-color: rgb(53, 64, 36);">Submit</button>
+        </form>
+    </div>
+</div>
+
+</div>
+</body>
+</html>

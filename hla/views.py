@@ -40,3 +40,6 @@ def home(request):
 def hla(request, pk):
     data = get_object_or_404(Data, pk=pk)
     return render(request, 'hla.html', {'data': data})
+
+def request_view(request):
+    return render(request,'request.html')
