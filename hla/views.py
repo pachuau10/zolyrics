@@ -37,20 +37,22 @@ def home(request):
     return render(request, 'home.html', {'data': data})
 
 
-def hla(request, pk):
-    data = get_object_or_404(Data, pk=pk)
-def hla(request, pk):
-    data = get_object_or_404(Data, pk=pk)
 
+
+def hla(request, name):
+    # Find by 'name' field in your model
+    data = get_object_or_404(Data, name=name)
+
+    # Unique view tracking per session
     viewed_posts = request.session.get('viewed_posts', [])
-
-    if pk not in viewed_posts:
+    if name not in viewed_posts:
         data.views += 1
         data.save(update_fields=['views'])
-        viewed_posts.append(pk)
+        viewed_posts.append(name)
         request.session['viewed_posts'] = viewed_posts
 
     return render(request, 'hla.html', {'data': data})
+
 
 
 

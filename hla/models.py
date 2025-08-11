@@ -6,7 +6,7 @@ from django.db import models
 # Create your models here.
 
 class Data(models.Model):
-    name = models.CharField(max_length=225)
+    name = models.CharField(max_length=225,unique=True)
     phuahtu = models.CharField(max_length=255,)
     satu = models.CharField(max_length=255,)
     desc = models.TextField()
