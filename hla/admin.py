@@ -4,6 +4,7 @@ from .models import Data, Req, ViewTracker
 # Create a custom ModelAdmin for the Data model
 @admin.register(Data)
 class DataAdmin(admin.ModelAdmin):
+    exclude = ('created_at',)
     # This tuple specifies which fields to display in the list view of the admin.
     # It makes the list page more informative and easier to browse.
     list_display = ('name', 'phuahtu', 'satu')

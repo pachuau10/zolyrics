@@ -30,9 +30,9 @@ def home(request):
             Q(name__icontains=query) |
             Q(phuahtu__icontains=query) |
             Q(satu__icontains=query)
-        )
+        ).order_by('-created_at')
     else:
-        data = Data.objects.all()
+        data = Data.objects.all().order_by('-created_at')
 
     return render(request, 'home.html', {'data': data})
 
