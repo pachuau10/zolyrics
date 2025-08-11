@@ -28,3 +28,8 @@ class Req(models.Model):
     def __str__(self):
         return self.req
        
+
+class ViewTracker(models.Model):
+    data = models.ForeignKey(Data, on_delete=models.CASCADE)
+    ip_address = models.GenericIPAddressField()
+    created_at = models.DateTimeField(auto_now_add=True)

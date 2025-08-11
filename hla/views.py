@@ -39,10 +39,31 @@ def home(request):
 
 def hla(request, pk):
     data = get_object_or_404(Data, pk=pk)
-    data.views += 1
-    data.save(update_fields=['views'])
+def hla(request, pk):
+    data = get_object_or_404(Data, pk=pk)
+
+    viewed_posts = request.session.get('viewed_posts', [])
+
+    if pk not in viewed_posts:
+        data.views += 1
+        data.save(update_fields=['views'])
+        viewed_posts.append(pk)
+        request.session['viewed_posts'] = viewed_posts
+
     return render(request, 'hla.html', {'data': data})
+
+
 
 
 def request_view(request):
     return render(request,'request.html')
+
+
+def get_client_ip(request):
+    """Get IP address from request headers."""
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
