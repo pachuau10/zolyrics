@@ -39,7 +39,10 @@ def home(request):
 
 def hla(request, pk):
     data = get_object_or_404(Data, pk=pk)
+    data.views += 1
+    data.save(update_fields=['views'])
     return render(request, 'hla.html', {'data': data})
+
 
 def request_view(request):
     return render(request,'request.html')

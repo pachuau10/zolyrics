@@ -13,6 +13,7 @@ class Data(models.Model):
     img = CloudinaryField('image', 
                          folder='thlalak/',
                          null=True, blank=True)
+    views = models.PositiveIntegerField(default=0) 
    
 
 
