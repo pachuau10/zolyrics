@@ -65,6 +65,19 @@
       <p style="font-weight: bold; padding-top:10px;">{{ data.desc|linebreaksbr }}</p>
     </div>
   </div>
+{% if data.youtube_id %}
+    <div class="d-flex justify-content-start pb-4" style="margin-left: 80px">
+        <div class="embed-responsive embed-responsive-16by9" style="max-width: 400px; max-height: 300px;">
+            <iframe
+                class="embed-responsive-item"
+                src="https://www.youtube.com/embed/{{ data.youtube_id }}"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+{% endif %}
 </div>
 
    

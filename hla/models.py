@@ -9,6 +9,7 @@ class Data(models.Model):
     img = CloudinaryField('image', folder='thlalak/', null=True, blank=True)
     views = models.PositiveIntegerField(default=0)  # For unique view count
     created_at = models.DateTimeField(auto_now_add=True)
+    youtube_id = models.CharField(max_length=20, null=True, blank=True)
     def __str__(self):
         return self.name
 

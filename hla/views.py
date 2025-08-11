@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from .models import Data, Req
 from django.http import JsonResponse
+import re  # This must be here
 
 def home(request):
     if 'term' in request.GET:
@@ -11,7 +12,7 @@ def home(request):
             Q(phuahtu__istartswith=term) |
             Q(satu__istartswith=term)
         ).values_list('name', 'phuahtu', 'satu').distinct()[:10]
-
+        
         suggestions = []
         for row in qs:
             suggestions.extend([v for v in row if v])
@@ -26,24 +27,21 @@ def home(request):
 
     query = request.GET.get('q')
     if query:
+        regex_query = r'\s*'.join(list(query))
+        
         data = Data.objects.filter(
-            Q(name__icontains=query) |
-            Q(phuahtu__icontains=query) |
-            Q(satu__icontains=query)
+            Q(name__iregex=regex_query) |
+            Q(phuahtu__iregex=regex_query) |
+            Q(satu__iregex=regex_query)
         ).order_by('-created_at')
     else:
         data = Data.objects.all().order_by('-created_at')
 
     return render(request, 'home.html', {'data': data})
 
-
-
-
 def hla(request, name):
-    # Find by 'name' field in your model
     data = get_object_or_404(Data, name=name)
 
-    # Unique view tracking per session
     viewed_posts = request.session.get('viewed_posts', [])
     if name not in viewed_posts:
         data.views += 1
@@ -53,13 +51,8 @@ def hla(request, name):
 
     return render(request, 'hla.html', {'data': data})
 
-
-
-
-
 def request_view(request):
-    return render(request,'request.html')
-
+    return render(request, 'request.html')
 
 def get_client_ip(request):
     """Get IP address from request headers."""
