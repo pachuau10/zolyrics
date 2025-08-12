@@ -54,6 +54,9 @@ def hla(request, name):
 
 def request_view(request):
     if request.method == 'POST':
+        request_text = request.POST.get('request')
+        if request_text:
+            Req.objects.create(req=request_text)
         messages.info(request,'Hla i rawn request avangin kan lawm e, rawn tih chhuah vat a ni ang😊')
     return render(request, 'request.html')
 
