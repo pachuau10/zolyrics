@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from .models import Data, Req
 from django.http import JsonResponse
+from django.contrib import messages
 import re  # This must be here
 
 def home(request):
@@ -52,7 +53,10 @@ def hla(request, name):
     return render(request, 'hla.html', {'data': data})
 
 def request_view(request):
+    if request.method == 'POST':
+        messages.info(request,'Hla i rawn request avangin kan lawm e, rawn tih chhuah vat a ni ang😊')
     return render(request, 'request.html')
+
 
 def get_client_ip(request):
     """Get IP address from request headers."""
