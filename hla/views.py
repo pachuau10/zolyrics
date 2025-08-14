@@ -38,12 +38,12 @@ def home(request):
         ).order_by('-created_at')
     else:
         data = Data.objects.all().order_by('-created_at')
-    paginator = Paginator(data, 8)  # 5 items per page
+    paginator = Paginator(data, 8)  
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'home.html', {
-        'data': page_obj,   # keeps your existing variable name
+        'data': page_obj,
         'query': query,
         'page_obj': page_obj })
 
