@@ -4,6 +4,7 @@ from .models import Data, Req
 from django.http import JsonResponse
 from django.contrib import messages
 import re  # This must be here
+from django.core.paginator import Paginator
 
 def home(request):
     if 'term' in request.GET:
@@ -26,7 +27,7 @@ def home(request):
             Req.objects.create(req=request_text)
         return redirect('home')
 
-    query = request.GET.get('q')
+    query = request.GET.get('q','')
     if query:
         regex_query = r'\s*'.join(list(query))
         
@@ -37,8 +38,16 @@ def home(request):
         ).order_by('-created_at')
     else:
         data = Data.objects.all().order_by('-created_at')
+    paginator = Paginator(data, 8)  # 5 items per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    return render(request, 'home.html', {'data': data})
+    return render(request, 'home.html', {
+        'data': page_obj,   # keeps your existing variable name
+        'query': query,
+        'page_obj': page_obj })
+
+
 
 def hla(request, name):
     data = get_object_or_404(Data, name=name)
@@ -73,3 +82,5 @@ def get_client_ip(request):
 
 def about(request):
     return render(request,'about.html')
+
+
